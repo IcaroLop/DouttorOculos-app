@@ -1,0 +1,67 @@
+{
+  "name": "DouttorOculos - Sistema de Gerenciamento de Óticas",
+  "short_name": "DouttorOculos",
+  "description": "Sistema completo de gerenciamento para óticas - vendas, estoque, receitas oftalmológicas",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1976d2",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logos/icons/logo_64.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logos/icons/logo_128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logos/icons/logo_256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logos/app/logo_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logos/app/logo_1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "medical"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Nova Venda",
+      "short_name": "Venda",
+      "description": "Registrar nova venda",
+      "url": "/vendas/nova",
+      "icons": [{ "src": "/logos/icons/logo_128.png", "sizes": "128x128" }]
+    },
+    {
+      "name": "Clientes",
+      "short_name": "Clientes",
+      "description": "Gerenciar clientes",
+      "url": "/clientes",
+      "icons": [{ "src": "/logos/icons/logo_128.png", "sizes": "128x128" }]
+    },
+    {
+      "name": "Produtos",
+      "short_name": "Produtos",
+      "description": "Gerenciar produtos",
+      "url": "/produtos",
+      "icons": [{ "src": "/logos/icons/logo_128.png", "sizes": "128x128" }]
+    }
+  ]
+}
