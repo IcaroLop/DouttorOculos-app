@@ -415,6 +415,20 @@ npm run build
 - **[RegrasNegocio.md](RegrasNegocio.md)** - Regras de negócio detalhadas
 - **[.github/copilot-instructions.md](.github/copilot-instructions.md)** - Instruções para IA
 
+## 🎨 Logos do Projeto
+
+Os assets já estão prontos no frontend para uso imediato:
+
+- Logos para app: [frontend-web/public/logos/app](frontend-web/public/logos/app)
+- Ícones (ex: favicon/PWA): [frontend-web/public/logos/icons](frontend-web/public/logos/icons)
+- Logo alta resolução para impressão: [frontend-web/public/logos/print/logo_2048.png](frontend-web/public/logos/print/logo_2048.png)
+
+Basta referenciar via caminho público, por exemplo:
+
+```tsx
+<img src="/logos/app/logo_512.png" alt="DouttorOculos" />
+```
+
 ---
 
 ## 🤝 Contribuindo
