@@ -23,6 +23,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleResolution": "node",
+    "noEmit": true,
     "allowImportingTsExtensions": true,
     "baseUrl": "./src",
     "paths": {

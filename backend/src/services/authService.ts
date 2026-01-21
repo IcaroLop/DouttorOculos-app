@@ -3,7 +3,7 @@ import { User } from '../entities/User';
 import { AppDataSource } from '../config/data-source';
 import { comparePassword, hashPassword } from '../utils/password';
 import env from '../config/env';
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 
 export type LoginInput = {
   portal: string;
@@ -52,16 +52,18 @@ export async function loginService(input: LoginInput) {
     throw error;
   }
 
+  const accessOptions: SignOptions = { expiresIn: env.auth.jwtExpiresIn as any };
   const accessToken = jwt.sign(
     { sub: user.id, portal: user.portal, cargo: user.cargo },
     env.auth.jwtSecret,
-    { expiresIn: env.auth.jwtExpiresIn }
+    accessOptions
   );
 
+  const refreshOptions: SignOptions = { expiresIn: env.auth.refreshExpiresIn as any };
   const refreshToken = jwt.sign(
     { sub: user.id, portal: user.portal },
     env.auth.refreshSecret,
-    { expiresIn: env.auth.refreshExpiresIn }
+    refreshOptions
   );
 
   return {

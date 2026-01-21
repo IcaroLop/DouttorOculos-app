@@ -14,3 +14,13 @@ export type LoginResponse = {
     cargo: string;
   };
 };
+
+export type RefreshPayload = {
+  refreshToken: string;
+  portal: string;
+};
+
+export type RefreshResponse = {
+  accessToken: string;
+  refreshToken?: string;
+};

@@ -4,6 +4,10 @@
 [![License](https://img.shields.io/badge/License-MIT-green)]()
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)]()
 [![React](https://img.shields.io/badge/React-18%2B-blue?logo=react)]()
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0%2B-blue?logo=typescript)]()
+[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)]()
+
+> **Status:** ✅ Backend e Frontend compilando sem erros | 📊 Ver [STATUS_IMPLEMENTACAO.md](./STATUS_IMPLEMENTACAO.md)
 
 ## 📋 Descrição
 
@@ -23,7 +27,18 @@
 
 ---
 
-## 🚀 Quick Start
+## � Documentação
+
+- **[STATUS_IMPLEMENTACAO.md](./STATUS_IMPLEMENTACAO.md)** - 📊 Status completo do projeto, features implementadas, TODOs
+- **[QUICK_REFERENCE.md](./QUICK_REFERENCE.md)** - ⚡ Guia rápido para IAs (stack, comandos, convenções)
+- **[API_ENDPOINTS.md](./API_ENDPOINTS.md)** - 🔗 Documentação completa de todos os 24 endpoints da API
+- **[RegrasNegocio.md](./RegrasNegocio.md)** - 📋 Regras de negócio do domínio de óticas
+- **[Infraestrutura.md](./Infraestrutura.md)** - 🏗️ Arquitetura, deploy, custos cloud
+- **[.github/copilot-instructions.md](./.github/copilot-instructions.md)** - 🤖 Instruções para IAs de codificação
+
+---
+
+## �🚀 Quick Start
 
 ### Pré-requisitos
 - Node.js v18+
@@ -71,58 +86,82 @@ Acesse http://localhost:3000
 
 ---
 
-## 📂 Estrutura do Projeto
+## � Status de Implementação
+
+**Última atualização:** 21 de Janeiro de 2026
+
+### ✅ Implementado e Funcional (100%)
+- ✅ Backend compilando sem erros TypeScript
+- ✅ Frontend compilando sem erros TypeScript
+- ✅ 7 entidades TypeORM (User, Loja, Cliente, Produto, Receita, Venda, ItemVenda)
+- ✅ 5 services backend com lógica de negócio completa
+- ✅ 24 endpoints API RESTful documentados
+- ✅ Validação Joi em todos endpoints
+- ✅ Redux Toolkit com 4 slices (auth, cliente, produto, venda)
+- ✅ 5 páginas frontend (Login, Dashboard, ListarClientes, ListarProdutos, ListarVendas)
+- ✅ 6 services frontend tipados
+- ✅ Autenticação JWT (access + refresh tokens)
+- ✅ Multi-tenancy via header `x-portal`
+- ✅ Soft delete em todas entidades
+- ✅ Auto-decremento de estoque em vendas
+
+### ⚠️ Parcialmente Implementado
+- ⚠️ Portal → LojaId mapping (hardcoded `lojaId=1` nos controllers)
+- ⚠️ Autorização por cargo (JWT contém `cargo`, mas sem guards)
+
+### ❌ Próximas Implementações
+- [ ] Formulários de criação/edição (FormCliente, FormProduto, FormReceita, FormVenda)
+- [ ] Páginas de detalhe (DetalheCliente, DetalheProduto, DetalheVenda)
+- [ ] Dashboard analítico com gráficos
+- [ ] Sistema de pedidos sob medida
+- [ ] Relatórios gerenciais (PDF/Excel)
+- [ ] Integrações (WhatsApp, NF-e, Gateway Pagamento)
+- [ ] PWA offline support
+- [ ] Testes automatizados (Jest, Vitest, Playwright)
+
+📖 **Veja documentação completa em:** [`STATUS_IMPLEMENTACAO.md`](./STATUS_IMPLEMENTACAO.md)
+
+---
+
+## �📂 Estrutura do Projeto
 
 ```
 DouttorOculos-app/
-│
-├── backend/
+├── backend/                       ✅ Compilando sem erros
 │   ├── src/
-│   │   ├── controllers/       # Lógica de negócio
-│   │   ├── models/            # Modelos Sequelize/TypeORM
-│   │   ├── routes/            # Rotas da API
-│   │   ├── middleware/        # Autenticação, validação
-│   │   ├── services/          # Lógica compartilhada
-│   │   └── config/            # Configurações
-│   ├── tests/                 # Testes unitários/integração
-│   ├── .env.example
-│   ├── package.json
-│   └── server.js
+│   │   ├── entities/              ✅ 7 entidades TypeORM
+│   │   ├── services/              ✅ 5 services completos
+│   │   ├── controllers/           ✅ 5 controllers RESTful
+│   │   ├── routes/                ✅ 24 endpoints API
+│   │   ├── middleware/            ✅ Joi validation
+│   │   ├── config/                ✅ DB + TypeORM + env
+│   │   └── utils/                 ✅ Bcrypt helpers
+│   ├── package.json               ✅
+│   └── tsconfig.json              ✅
 │
-├── frontend-web/
+├── frontend-web/                  ✅ Compilando sem erros
 │   ├── src/
-│   │   ├── components/        # Componentes reutilizáveis
-│   │   ├── pages/             # Páginas da aplicação
-│   │   ├── services/          # Chamadas à API
-│   │   ├── redux/             # State management
-│   │   ├── styles/            # Estilos globais
-│   │   ├── utils/             # Funções utilitárias
-│   │   ├── App.tsx
-│   │   └── index.tsx
-│   ├── public/
-│   │   ├── manifest.json      # PWA manifest
-│   │   └── index.html
-│   ├── tests/
-│   ├── package.json
-│   └── tsconfig.json
+│   │   ├── pages/                 ✅ 5 páginas (Login, Dashboard, Listar*)
+│   │   ├── components/            ✅ ProtectedRoute
+│   │   ├── redux/slices/          ✅ 4 slices (auth, cliente, produto, venda)
+│   │   ├── services/              ✅ 6 API clients tipados
+│   │   ├── hooks/                 ✅ useRedux
+│   │   └── types/                 ✅ TypeScript interfaces
+│   ├── public/                    ✅ PWA (manifest.json, sw.js)
+│   ├── package.json               ✅
+│   └── tsconfig.json              ✅
 │
-├── docs/
-│   ├── Infraestrutura.md      # Arquitetura e deploy
-│   ├── RegrasNegocio.md       # Regras de negócio
-│   ├── API.md                 # Documentação da API
-│   └── SETUP.md               # Guia de setup
-│
-├── .github/
-│   ├── workflows/
-│   │   ├── ci.yml             # CI/CD pipeline
-│   │   └── deploy.yml         # Deploy automático
-│   └── copilot-instructions.md
-│
-├── docker-compose.yml         # Desenvolvimento local
-├── .env.example
-├── README.md
-└── package.json               # Scripts compartilhados
+├── .env.example                   ✅
+├── docker-compose.yml             ✅
+├── STATUS_IMPLEMENTACAO.md        ✅ ← Leia este para status detalhado
+├── Infraestrutura.md              ✅
+└── RegrasNegocio.md               ✅
 ```
+
+**Legenda:**
+- ✅ = Implementado e funcional
+- ⚠️ = Parcialmente implementado
+- ❌ = Não implementado
 
 ---
 

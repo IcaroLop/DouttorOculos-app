@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
+import { setAuth, selectIsAuthenticated } from '../redux/slices/authSlice';
 import { login } from '../services/auth';
 import type { LoginPayload } from '../types/auth';
 
@@ -88,6 +91,10 @@ const hintStyle: React.CSSProperties = {
 };
 
 function Login() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const [form, setForm] = useState<LoginPayload>({
     portal: '',
     username: '',
@@ -103,6 +110,13 @@ function Login() {
       setForm((prev) => ({ ...prev, portal: savedPortal }));
     }
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname || '/dashboard';
+      navigate(from, { replace: true });
+    }
+  }, [isAuthenticated, location.state, navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -125,8 +139,16 @@ function Login() {
     setLoading(true);
     try {
       const data = await login({ ...form, portal: form.portal.trim() });
+      dispatch(
+        setAuth({
+          accessToken: data.accessToken,
+          refreshToken: data.refreshToken ?? null,
+          portal: form.portal.trim(),
+          user: data.user,
+        }),
+      );
       setSuccess(`Bem-vindo(a), ${data.user.nome}!`);
-      // TODO: armazenar tokens e redirecionar para dashboard quando existir rota protegida
+      navigate('/dashboard', { replace: true });
     } catch (err: any) {
       const message = err?.response?.data?.message || 'Não foi possível efetuar login.';
       setError(message);
