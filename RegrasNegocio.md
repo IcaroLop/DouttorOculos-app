@@ -333,6 +333,14 @@
 - ✅ **PCI DSS**: Se processar cartão de crédito (padrão de segurança)
 - ✅ **NF-e**: Emissão de nota fiscal eletrônica (se obrigatório)
 
+### 9.7 Autenticação e Portais (Login)
+- **Endpoint**: `POST /api/v1/auth/login` com payload `{ portal, username, password }`.
+- **Portal obrigatório**: define a ótica (tenant) e a base de dados a acessar; valor deve ser persistido no cliente e enviado também em header `x-portal`.
+- **Usuário Admin padrão**: seed automático via `.env` (padrão portal `default`, usuário `admin`, senha `123456`); usado para primeiro acesso.
+- **Tokens**: JWT (expiração 15min) + Refresh (7 dias); ambos devolvidos no login.
+- **Recuperação de senha**: link "Esqueci minha senha?" preparado para enviar e-mail ao Administrador do DouttorOculos (fluxo a implementar com envio de e-mail e validação).
+- **Validações**: bloquear login se `ativo = false`; exigir portal/usuário/senha; aplicar rate limit (100 req/min/IP) e audit log de login/logout.
+
 ---
 
 ## 10. Integrações Opcionais
