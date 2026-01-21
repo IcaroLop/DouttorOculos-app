@@ -1,5 +1,5 @@
 // Service Worker para PWA - DouttorOculos
-const CACHE_NAME = 'douttoroculos-v1';
+const CACHE_NAME = 'douttoroculos-v2';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -16,6 +16,7 @@ self.addEventListener('install', (event) => {
       return cache.addAll(urlsToCache);
     })
   );
+  self.skipWaiting();
 });
 
 // Ativação do Service Worker
@@ -32,6 +33,7 @@ self.addEventListener('activate', (event) => {
       );
     })
   );
+  self.clients.claim();
 });
 
 // Interceptar requisições
